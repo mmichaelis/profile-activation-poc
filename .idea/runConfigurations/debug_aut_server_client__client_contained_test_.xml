@@ -29,7 +29,7 @@
             <list>
               <option value="install" />
               <option value="-pl" />
-              <option value=":client-contained-test" />
+              <option value=":client-contained-itest" />
               <option value="--debug" />
             </list>
           </option>
