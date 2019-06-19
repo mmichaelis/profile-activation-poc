@@ -86,6 +86,16 @@ The proof-of-concept POMs you will find in here are for the following scenario:
     last. So, executing this module with either `-Daut-client -Daut-server` or
     `-Daut-server -Daut-client` will both cause the debugging property `propertySourceId`
     to be set to `aut-server` as this is the profile which comes last.
+    
+    *Motivation:* This approach may be used for example to not only activate or
+    deactivate a complete module depending on a given AUT, but to also select
+    certain tests to run. Based on the `<include>` configuration for
+    [Maven Surefire Plugin][maven-surefire] the example POM shows, how such an
+    include string may be built.
+    
+    Note, that a naive approach using `<testIncludes>${testIncludes},**/*ServerTest.java</testIncludes>`
+    will fail, because Maven forbids cyclic references in properties. Thus, we have to use
+    several properties which are later merged into one.
 
 ### Profile Activation Extensions
 
@@ -107,6 +117,7 @@ script-based profile activation. Previous approaches seem to be dead since 2016.
 ## See Also
 
 * Apache Software Foundation: [Custom Profile Activators - Maven][ASF-Wiki-ProfileActivators]
+* Apache Software Foundation: [Maven Surefire Plugin][maven-surefire]
 * Apache Software Foundation: [\[MNG-3328\] Allow multiple profile activation properties.][MNG-3328]
 * Apache Software Foundation: [\[MNG-6345\] Support profile activation via script.][MNG-6345]
 * Baeldung: [Guide to Maven Profiles][baeldung-maven-profiles]
@@ -121,3 +132,6 @@ script-based profile activation. Previous approaches seem to be dead since 2016.
 [profile-activator-extension]: <https://github.com/random-maven/profile-activator-extension> "random-maven/profile-activator-extension: Provide flexible Maven profile activation via script"
 [stackoverflow-5417437]: <https://stackoverflow.com/questions/5417437/activation-of-maven-profile-based-on-multiple-properties> "Activation of maven profile based on multiple properties - Stack Overflow"
 [wikipedia-en-mvel]: <https://en.wikipedia.org/wiki/MVEL> "MVEL - Wikipedia"
+
+
+[maven-surefire]: <https://maven.apache.org/surefire/maven-surefire-plugin/> "Maven Surefire Plugin – Introduction"

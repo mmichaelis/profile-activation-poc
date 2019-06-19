@@ -17,6 +17,10 @@
   <properties>
     <unmatchedAut>false</unmatchedAut>
     <propertySourceId>project-default</propertySourceId>
+    <standardIncludes>**/*Test.java</standardIncludes>
+    <clientIncludes>SkipClient.java</clientIncludes>
+    <serverIncludes>SkipServer.java</serverIncludes>
+    <testIncludes>${standardIncludes},${clientIncludes},${serverIncludes}</testIncludes>
   </properties>
 
   <profiles>
@@ -34,6 +38,7 @@
       <properties>
         <unmatchedAut>true</unmatchedAut>
         <propertySourceId>use-aut</propertySourceId>
+        <standardIncludes>SkipUnmatched.java</standardIncludes>
       </properties>
     </profile>
     <profile>
@@ -46,6 +51,7 @@
       <properties>
         <unmatchedAut>false</unmatchedAut>
         <propertySourceId>aut-client</propertySourceId>
+        <clientIncludes>**/*ClientTest.java</clientIncludes>
       </properties>
     </profile>
     <profile>
@@ -58,6 +64,7 @@
       <properties>
         <unmatchedAut>false</unmatchedAut>
         <propertySourceId>aut-server</propertySourceId>
+        <serverIncludes>**/*ServerTest.java</serverIncludes>
       </properties>
     </profile>
   </profiles>
@@ -66,6 +73,20 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>echo-test-includes</id>
+            <phase>install</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <echo>- Test Includes: ${testIncludes}</echo>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
