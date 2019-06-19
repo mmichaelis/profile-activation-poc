@@ -12,6 +12,7 @@
     <module>client-only-itest</module>
     <module>client-or-server-exclusive-itest</module>
     <module>client-contained-itest</module>
+    <module>client-contained-multi-properties-itest</module>
   </modules>
 
   <properties>

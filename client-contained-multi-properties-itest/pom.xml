@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>profile-activation-poc</artifactId>
+    <groupId>com.github.mmichaelis.maven</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>client-contained-multi-properties-itest</artifactId>
+  <packaging>pom</packaging>
+
+  <description>Should run tests if aut-client is set (to any value) or neither aut-client, nor aut-server is set. Requires 'use-aut' property/profile.</description>
+
+  <properties>
+    <unmatchedAut>false</unmatchedAut>
+    <propertySourceId>project-default</propertySourceId>
+  </properties>
+
+  <profiles>
+    <!--
+      use-aut:
+        Enable partial AUT parsing. See README.md for details.
+    -->
+    <profile>
+      <id>use-aut</id>
+      <activation>
+        <property>
+          <name>use-aut</name>
+        </property>
+      </activation>
+      <properties>
+        <unmatchedAut>true</unmatchedAut>
+        <propertySourceId>use-aut</propertySourceId>
+      </properties>
+    </profile>
+    <profile>
+      <id>aut-client</id>
+      <activation>
+        <property>
+          <name>aut-client</name>
+        </property>
+      </activation>
+      <properties>
+        <unmatchedAut>false</unmatchedAut>
+        <propertySourceId>aut-client</propertySourceId>
+      </properties>
+    </profile>
+  </profiles>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

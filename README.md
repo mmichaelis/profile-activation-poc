@@ -56,6 +56,27 @@ The proof-of-concept POMs you will find in here are for the following scenario:
 
     These tests will run if the AUT is either "client" or "server" but not both.
 
+* **client-contained-multi-properties-itest:**
+
+    This approach will switch test execution on property name rather than property value.
+    Benefit: We can now cover the scenario to run tests, if the module applies to one
+    of several specified AUTs without using an extension.
+    
+    Caveat: We either end up in huge POMs with many profiles if we have a bunch of
+    AUTs to support (we need to explicitly list all AUTs not covered by this module), or
+    we need an extra property to actually activate selective AUT execution.
+    
+    In the example we have chosen the second option, as the POMs will be much less
+    verbose. The AUT selection will then look like as given in the examples below:
+    
+    ```text
+    $ mvn verify -Duse-aut -Daut-client
+    $ mvn verify -Duse-aut -Daut-server
+    $ mvn verify -Duse-aut -Daut-client -Daut-server
+    ``` 
+
+    Where only in the second example the tests will not run.
+
 ### Profile Activation Extensions
 
 As stated before, standard Maven profile activation is rather restricted. That is
