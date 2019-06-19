@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>profile-activation-poc</artifactId>
+    <groupId>com.github.mmichaelis.maven</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>client-contained-itest</artifactId>
+  <packaging>pom</packaging>
+
+  <description>Should run tests if one of the csv-AUTs is in (client, &lt;unset&gt;).</description>
+
+  <properties>
+    <unmatchedAut>false</unmatchedAut>
+    <targetAut>client</targetAut>
+    <propertySourceId>project-default</propertySourceId>
+  </properties>
+
+  <profiles>
+    <profile>
+      <id>aut-unmatched</id>
+      <!--
+        The aut-fallback mechanism does not work if combined with activator profiles.
+        The aut-fallback mechanism used in other modules combined with a matching
+        activator profile will cause the aut-fallback profile to 'win' and set
+        unmatchedAut to true.
+
+        But: Using the activator plugin, it is sufficient to have just one profile
+        which just sets unmatchedAut to true, if the AUT requirements are not met.
+      -->
+      <activation>
+        <property>
+          <name>[ACTIVATOR:MVELSCRIPT]</name>
+          <value><![CDATA[
+          isdef aut && !(aut.split(",") contains targetAut)
+          ]]></value>
+        </property>
+      </activation>
+      <properties>
+        <unmatchedAut>true</unmatchedAut>
+        <propertySourceId>aut-unmatched</propertySourceId>
+      </properties>
+    </profile>
+  </profiles>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>profile-activation-poc</artifactId>
+    <groupId>com.github.mmichaelis.maven</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>client-itest</artifactId>
+  <packaging>pom</packaging>
+
+  <description>Should run tests if aut is in (client, &lt;unset&gt;).</description>
+
+  <properties>
+    <unmatchedAut>false</unmatchedAut>
+    <propertySourceId>project-default</propertySourceId>
+  </properties>
+
+  <profiles>
+    <profile>
+      <id>aut-fallback</id>
+      <!--
+        This will first deactivate tests, if any 'aut' property has been specified.
+      -->
+      <activation>
+        <property>
+          <name>aut</name>
+        </property>
+      </activation>
+      <properties>
+        <unmatchedAut>true</unmatchedAut>
+        <propertySourceId>aut-fallback</propertySourceId>
+      </properties>
+    </profile>
+    <profile>
+      <id>aut-client</id>
+      <!--
+        This will activate tests if 'aut' is set to 'client'.
+      -->
+      <activation>
+        <property>
+          <name>aut</name>
+          <value>client</value>
+        </property>
+      </activation>
+      <properties>
+        <unmatchedAut>false</unmatchedAut>
+        <propertySourceId>aut-client</propertySourceId>
+      </properties>
+    </profile>
+  </profiles>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>

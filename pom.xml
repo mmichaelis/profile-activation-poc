@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.github.mmichaelis.maven</groupId>
+  <artifactId>profile-activation-poc</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0.0-SNAPSHOT</version>
+  <modules>
+    <module>client-only-itest</module>
+    <module>client-or-server-exclusive-itest</module>
+    <module>client-contained-itest</module>
+  </modules>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.8</version>
+          <configuration>
+            <target>
+              <echo>I am here: ${project.artifactId}</echo>
+              <echo>- ${project.description}</echo>
+              <!--suppress MavenModelInspection -->
+              <echo>- Selected AUT: ${aut}</echo>
+              <echo>- Property Source: ${propertySourceId}</echo>
+              <echo>- Skip tests: ${unmatchedAut}</echo>
+            </target>
+          </configuration>
+          <executions>
+            <execution>
+              <phase>install</phase>
+              <goals>
+                <goal>run</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
