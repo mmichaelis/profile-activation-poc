@@ -20,6 +20,26 @@
     <propertySourceId>project-default</propertySourceId>
   </properties>
 
+  <!-- random-maven/profile-activator-extension#2 -->
+  <!--
+    The following dependency management will cause issue #2 in
+    profile-activator-extension. Thus, this approach is currently
+    not usable (June 2019) for projects requiring POM imports.
+  -->
+  <!--
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>client-only-itest</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  -->
+
   <profiles>
     <profile>
       <id>aut-unmatched</id>
