@@ -78,11 +78,13 @@ script-based profile activation. Previous approaches seem to be dead since 2016.
 * Apache Software Foundation: [Custom Profile Activators - Maven][ASF-Wiki-ProfileActivators]
 * Apache Software Foundation: [\[MNG-3328\] Allow multiple profile activation properties.][MNG-3328]
 * Apache Software Foundation: [\[MNG-6345\] Support profile activation via script.][MNG-6345]
+* Baeldung: [Guide to Maven Profiles][baeldung-maven-profiles]
 * GitHub: [random-maven/profile-activator-extension: Provide flexible Maven profile activation via script][profile-activator-extension]
 * Stack Overflow: [Activation of maven profile based on multiple properties][stackoverflow-5417437]
 * Wikipedia: [MVEL][wikipedia-en-mvel]
 
 [ASF-Wiki-ProfileActivators]: <https://cwiki.apache.org/confluence/display/MAVENOLD/Custom+Profile+Activators> "Custom Profile Activators - Maven - Apache Software Foundation"
+[baeldung-maven-profiles]: <https://www.baeldung.com/maven-profiles> "Guide to Maven Profiles | Baeldung"
 [MNG-3328]: <https://issues.apache.org/jira/browse/MNG-3328> "[MNG-3328] Allow multiple profile activation properties. - ASF JIRA"
 [MNG-6345]: <https://issues.apache.org/jira/browse/MNG-6345> "[MNG-6345] Support profile activation via script. - ASF JIRA"
 [profile-activator-extension]: <https://github.com/random-maven/profile-activator-extension> "random-maven/profile-activator-extension: Provide flexible Maven profile activation via script"
