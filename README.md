@@ -77,6 +77,16 @@ The proof-of-concept POMs you will find in here are for the following scenario:
 
     Where only in the second example the tests will not run.
 
+* **client-or-server-contained-multi-properties-itest:**
+
+    Very similar to the previous approach, but this time tests will run if either
+    `aut-client` or `aut-server` is set, or both. It may be interesting to know that
+    the order of properties given does not influence the profile parsing. Instead the
+    order of profiles as given in the POM determines which profile gets checked/activated
+    last. So, executing this module with either `-Daut-client -Daut-server` or
+    `-Daut-server -Daut-client` will both cause the debugging property `propertySourceId`
+    to be set to `aut-server` as this is the profile which comes last.
+
 ### Profile Activation Extensions
 
 As stated before, standard Maven profile activation is rather restricted. That is
